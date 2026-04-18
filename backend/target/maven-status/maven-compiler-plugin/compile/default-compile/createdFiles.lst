@@ -4,6 +4,7 @@ lk\sliit\it3030\smartcampus\booking\exception\BookingConflictException.class
 lk\sliit\it3030\smartcampus\booking\dto\BookingCreateRequestDto.class
 lk\sliit\it3030\smartcampus\booking\entity\Booking.class
 lk\sliit\it3030\smartcampus\booking\entity\BookingStatus.class
+lk\sliit\it3030\smartcampus\booking\dto\BookingStatusUpdateDto.class
 lk\sliit\it3030\smartcampus\booking\dto\BookingResponseDto.class
 lk\sliit\it3030\smartcampus\booking\exception\GlobalExceptionHandler.class
 lk\sliit\it3030\smartcampus\booking\controller\BookingController.class

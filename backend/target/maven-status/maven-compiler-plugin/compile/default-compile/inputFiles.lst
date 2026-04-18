@@ -1,6 +1,7 @@
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\controller\BookingController.java
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\dto\BookingCreateRequestDto.java
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\dto\BookingResponseDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\dto\BookingStatusUpdateDto.java
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\entity\Booking.java
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\entity\BookingStatus.java
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\exception\BookingConflictException.java
