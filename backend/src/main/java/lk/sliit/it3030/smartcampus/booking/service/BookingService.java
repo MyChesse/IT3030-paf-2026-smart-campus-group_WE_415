@@ -64,4 +64,33 @@ public class BookingService {
         dto.setUpdatedAt(booking.getUpdatedAt());
         return dto;
     }
+
+        /**
+     * Admin only: Get ALL bookings with optional filters
+     */
+    public List<BookingResponseDto> getAllBookings(
+            BookingStatus status, 
+            LocalDateTime startDate, 
+            LocalDateTime endDate) {
+
+        List<Booking> bookings;
+
+        if (status != null) {
+            bookings = bookingRepository.findByStatus(status);
+        } else {
+            bookings = bookingRepository.findAll();
+        }
+
+        // Optional date filter
+        if (startDate != null && endDate != null) {
+            bookings = bookings.stream()
+                    .filter(b -> !b.getStartTime().isBefore(startDate) && 
+                                 !b.getEndTime().isAfter(endDate))
+                    .toList();
+        }
+
+        return bookings.stream()
+                .map(this::convertToDto)
+                .toList();
+    }
 }
