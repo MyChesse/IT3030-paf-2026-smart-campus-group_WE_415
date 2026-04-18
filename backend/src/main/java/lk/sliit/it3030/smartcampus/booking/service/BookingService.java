@@ -93,4 +93,42 @@ public class BookingService {
                 .map(this::convertToDto)
                 .toList();
     }
+
+        @Transactional
+    public BookingResponseDto approveBooking(Long bookingId, String reason, Long adminId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        if (booking.getStatus() != BookingStatus.PENDING) {
+            throw new RuntimeException("Only PENDING bookings can be approved");
+        }
+
+        booking.setStatus(BookingStatus.APPROVED);
+        booking.setRejectionReason(null); // clear if any
+        booking.setCancellationReason(null);
+
+        Booking updated = bookingRepository.save(booking);
+        return convertToDto(updated);
+    }
+
+    @Transactional
+    public BookingResponseDto rejectBooking(Long bookingId, String reason, Long adminId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        if (booking.getStatus() != BookingStatus.PENDING) {
+            throw new RuntimeException("Only PENDING bookings can be rejected");
+        }
+
+        if (reason == null || reason.trim().isEmpty()) {
+            throw new RuntimeException("Rejection reason is required");
+        }
+
+        booking.setStatus(BookingStatus.REJECTED);
+        booking.setRejectionReason(reason);
+
+        Booking updated = bookingRepository.save(booking);
+        return convertToDto(updated);
+    }
+
 }

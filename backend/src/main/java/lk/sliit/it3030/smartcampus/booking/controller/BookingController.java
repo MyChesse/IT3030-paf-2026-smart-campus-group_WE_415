@@ -3,6 +3,7 @@ package lk.sliit.it3030.smartcampus.booking.controller;
 import jakarta.validation.Valid;
 import lk.sliit.it3030.smartcampus.booking.dto.BookingCreateRequestDto;
 import lk.sliit.it3030.smartcampus.booking.dto.BookingResponseDto;
+import lk.sliit.it3030.smartcampus.booking.dto.BookingStatusUpdateDto;
 import lk.sliit.it3030.smartcampus.booking.entity.BookingStatus;
 import lk.sliit.it3030.smartcampus.booking.service.BookingService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,7 +29,6 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<BookingResponseDto> createBooking(
             @Valid @RequestBody BookingCreateRequestDto request) {
-        // Temporary userId = 1 (we will replace with real authentication later)
         BookingResponseDto response = bookingService.createBooking(request, 1L);
         return ResponseEntity.status(201).body(response);
     }
@@ -49,5 +49,21 @@ public class BookingController {
 
         List<BookingResponseDto> bookings = bookingService.getAllBookings(status, startDate, endDate);
         return ResponseEntity.ok(bookings);
+    }
+
+    @PatchMapping("/{id}/approve")
+    public ResponseEntity<BookingResponseDto> approveBooking(
+            @PathVariable Long id,
+            @RequestBody BookingStatusUpdateDto dto) {
+        BookingResponseDto response = bookingService.approveBooking(id, dto.getReason(), 999L); // adminId temporary
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/reject")
+    public ResponseEntity<BookingResponseDto> rejectBooking(
+            @PathVariable Long id,
+            @RequestBody BookingStatusUpdateDto dto) {
+        BookingResponseDto response = bookingService.rejectBooking(id, dto.getReason(), 999L); // adminId temporary
+        return ResponseEntity.ok(response);
     }
 }
