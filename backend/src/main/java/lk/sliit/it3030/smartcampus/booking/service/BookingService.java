@@ -50,6 +50,16 @@ public class BookingService {
         return convertToResponseDto(savedBooking);
     }
 
+    /**
+     * Get all bookings for the current user
+     */
+    public List<BookingResponseDto> getMyBookings(Long userId) {
+        List<Booking> bookings = bookingRepository.findByUserId(userId);
+        return bookings.stream()
+                .map(this::convertToResponseDto)
+                .toList();
+    }
+
     private BookingResponseDto convertToResponseDto(Booking booking) {
         BookingResponseDto dto = new BookingResponseDto();
         dto.setId(booking.getId());
