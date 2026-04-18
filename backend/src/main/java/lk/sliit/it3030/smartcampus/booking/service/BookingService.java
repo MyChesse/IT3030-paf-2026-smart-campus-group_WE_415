@@ -131,4 +131,22 @@ public class BookingService {
         return convertToDto(updated);
     }
 
+        @Transactional
+    public BookingResponseDto cancelBooking(Long bookingId, String reason, Long userId) {
+        Booking booking = bookingRepository.findById(bookingId)
+                .orElseThrow(() -> new RuntimeException("Booking not found"));
+
+        // Only APPROVED bookings can be cancelled
+        if (booking.getStatus() != BookingStatus.APPROVED) {
+            throw new RuntimeException("Only APPROVED bookings can be cancelled");
+        }
+
+        // Optional: Allow only the owner or admin to cancel (for now we allow anyone for simplicity)
+        booking.setStatus(BookingStatus.CANCELLED);
+        booking.setCancellationReason(reason != null ? reason : "Cancelled by user");
+
+        Booking updated = bookingRepository.save(booking);
+        return convertToDto(updated);
+    }
+
 }

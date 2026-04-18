@@ -66,4 +66,15 @@ public class BookingController {
         BookingResponseDto response = bookingService.rejectBooking(id, dto.getReason(), 999L); // adminId temporary
         return ResponseEntity.ok(response);
     }
+    
+     @PatchMapping("/{id}/cancel")
+    public ResponseEntity<BookingResponseDto> cancelBooking(
+            @PathVariable Long id,
+            @RequestBody(required = false) BookingStatusUpdateDto dto) {
+        
+        String reason = (dto != null && dto.getReason() != null) ? dto.getReason() : "Cancelled by user";
+        BookingResponseDto response = bookingService.cancelBooking(id, reason, 1L);
+        return ResponseEntity.ok(response);
+    }
+
 }
