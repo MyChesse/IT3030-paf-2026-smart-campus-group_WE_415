@@ -1,6 +1,7 @@
 package lk.sliit.it3030.smartcampus.booking;
 
 import lk.sliit.it3030.smartcampus.booking.dto.BookingCreateRequestDto;
+import lk.sliit.it3030.smartcampus.booking.dto.BookingResponseDto;
 import lk.sliit.it3030.smartcampus.booking.entity.Booking;
 import lk.sliit.it3030.smartcampus.booking.entity.BookingStatus;
 import lk.sliit.it3030.smartcampus.booking.exception.BookingConflictException;
@@ -16,7 +17,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
