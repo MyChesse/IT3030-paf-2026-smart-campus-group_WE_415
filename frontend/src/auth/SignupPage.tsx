@@ -8,6 +8,7 @@ import './LoginPage.css';
 export default function SignupPage() {
   const { signup } = useAuth();
   const navigate = useNavigate();
+  const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
   const [form, setForm] = useState({ name: '', email: '', password: '', confirmPassword: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -48,7 +49,7 @@ export default function SignupPage() {
   };
 
   const handleGoogleSignup = () => {
-    window.location.href = 'http://localhost:8081/oauth2/authorization/google';
+    window.location.href = `${apiBaseUrl}/oauth2/authorization/google?prompt=select_account`;
   };
 
   return (

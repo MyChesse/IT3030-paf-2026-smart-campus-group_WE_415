@@ -10,6 +10,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as any)?.from?.pathname || '/dashboard';
+  const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
@@ -35,7 +36,7 @@ export default function LoginPage() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:8081/oauth2/authorization/google';
+    window.location.href = `${apiBaseUrl}/oauth2/authorization/google?prompt=select_account`;
   };
 
   return (

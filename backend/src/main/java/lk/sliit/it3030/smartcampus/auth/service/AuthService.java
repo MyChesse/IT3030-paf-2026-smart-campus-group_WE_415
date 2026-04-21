@@ -3,7 +3,9 @@ package lk.sliit.it3030.smartcampus.auth.service;
 import lk.sliit.it3030.smartcampus.auth.dto.AuthRequests;
 import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
 import lk.sliit.it3030.smartcampus.auth.repository.AppUserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -95,10 +97,7 @@ public class AuthService {
             }
         }
 
-        return appUserRepository.findAll().stream()
-                .findFirst()
-                .map(AppUser::getId)
-                .orElseThrow(() -> new RuntimeException("No users available"));
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
     }
 
     public String issueToken(Long userId) {

@@ -4,11 +4,9 @@ import jakarta.validation.Valid;
 import lk.sliit.it3030.smartcampus.auth.dto.AuthRequests;
 import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
 import lk.sliit.it3030.smartcampus.auth.service.AuthService;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.Map;
 
 @RestController
@@ -56,15 +54,5 @@ public class AuthController {
             @Valid @RequestBody AuthRequests.ResetPasswordVerifyOtpRequest request
     ) {
         return ResponseEntity.ok(authService.verifyOtpResetPassword(request));
-    }
-
-    @GetMapping("/oauth2/authorization/google")
-    public ResponseEntity<Void> mockGoogleAuthRedirect() {
-        Long userId = authService.resolveUserId(null);
-        String token = authService.issueToken(userId);
-
-        return ResponseEntity.status(302)
-                .header(HttpHeaders.LOCATION, URI.create("http://localhost:5173/oauth2/callback?token=" + token).toString())
-                .build();
     }
 }

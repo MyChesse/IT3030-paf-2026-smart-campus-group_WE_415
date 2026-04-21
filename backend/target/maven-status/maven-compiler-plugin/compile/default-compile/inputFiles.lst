@@ -1,9 +1,12 @@
+/Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/HomeController.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/SmartCampusBackendApplication.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/admin/controller/AdminController.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/controller/AuthController.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/dto/AuthRequests.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/entity/AppUser.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/repository/AppUserRepository.java
+/Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/security/OAuth2LoginFailureHandler.java
+/Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/security/OAuth2LoginSuccessHandler.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/auth/service/AuthService.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/booking/controller/BookingController.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/booking/dto/BookingCreateRequestDto.java
@@ -15,6 +18,7 @@
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/booking/exception/GlobalExceptionHandler.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/booking/repository/BookingRepository.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/booking/service/BookingService.java
+/Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/config/SecurityConfig.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/config/WebCorsConfig.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/init/DataInitializer.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/lk/sliit/it3030/smartcampus/notifications/controller/NotificationController.java
