@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { bookingService, type Booking } from '../services/bookingService';
-import { Calendar, Users, CheckCircle, XCircle, AlertTriangle, RefreshCw } from 'lucide-react';
+import { CheckCircle, XCircle, AlertTriangle, RefreshCw } from 'lucide-react';
 
 const AdminBookings: React.FC = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);

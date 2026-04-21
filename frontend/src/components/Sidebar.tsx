@@ -1,48 +1,39 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router';
-import { Home, Calendar, Bell, Wrench, Users } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
-const navItems = [
-  { path: '/', icon: Home, label: 'Home' },
-  { path: '/create-booking', icon: Calendar, label: 'Create Booking' },
-  { path: '/my-bookings', icon: Users, label: 'My Bookings' },
-  { path: '/admin', icon: Wrench, label: 'Admin Panel' },
-  { path: '/notices', icon: Bell, label: 'Notices' },
-];
+export default function Sidebar() {
+  const { isAdmin, isTechnician } = useAuth();
 
-const Sidebar: React.FC = () => {
-  const location = useLocation();
+  const links = [
+    { to: '/dashboard', label: 'Dashboard', icon: 'DB' },
+    { to: '/resources', label: 'Resources', icon: 'RS' },
+    { to: '/create-booking', label: 'Create Booking', icon: 'CB' },
+    { to: '/bookings', label: 'My Bookings', icon: 'MB' },
+    { to: '/tickets', label: isTechnician && !isAdmin ? 'My Tickets' : 'Tickets', icon: 'TK' },
+    { to: '/notifications', label: 'Notifications', icon: 'NT' },
+    { to: '/profile', label: 'Profile', icon: 'PR' },
+  ];
+
+  if (isAdmin) {
+    links.splice(4, 0, { to: '/admin', label: 'Admin Panel', icon: 'AD' });
+    links.splice(5, 0, { to: '/admin-bookings', label: 'Booking Review', icon: 'BR' });
+  }
 
   return (
-    <div className="w-72 bg-white border-r h-screen fixed left-0 top-0 pt-20 shadow-sm">
-      <div className="px-6 py-8">
-        <div className="space-y-2">
-          {navItems.map((item) => {
-            const isActive = location.pathname === item.path;
-            const Icon = item.icon;
-
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center gap-4 px-6 py-4 rounded-2xl transition-all group ${
-                  isActive 
-                    ? 'bg-blue-600 text-white' 
-                    : 'hover:bg-gray-100 text-gray-700'
-                }`}
-              >
-                <Icon 
-                  size={22} 
-                  className={isActive ? "text-white" : "text-gray-500 group-hover:text-blue-600"} 
-                />
-                <span className="font-medium">{item.label}</span>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
-    </div>
+    <aside className="sidebar">
+      <div className="sidebar__brand">SmartUni</div>
+      <nav className="sidebar__nav">
+        {links.map((link) => (
+          <NavLink
+            key={link.to}
+            to={link.to}
+            className={({ isActive }) => `sidebar__link ${isActive ? 'sidebar__link--active' : ''}`}
+          >
+            <span className="sidebar__icon">{link.icon}</span>
+            <span>{link.label}</span>
+          </NavLink>
+        ))}
+      </nav>
+    </aside>
   );
-};
-
-export default Sidebar;
+}
