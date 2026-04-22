@@ -7,6 +7,10 @@ const navItems = [
   { path: '/create-booking', icon: Calendar, label: 'Create Booking' },
   { path: '/my-bookings', icon: Users, label: 'My Bookings' },
   { path: '/admin', icon: Wrench, label: 'Admin Panel' },
+  { path: '/tickets/create', icon: Calendar, label: 'Create Ticket' },
+  { path: '/tickets/my', icon: Users, label: 'My Tickets' },
+  { path: '/admin/tickets', icon: Wrench, label: 'Ticket Management' },
+  { path: '/technician/tickets', icon: Wrench, label: 'Technician Tickets' },
   { path: '/notices', icon: Bell, label: 'Notices' },
 ];
 

@@ -1,9 +1,15 @@
-package lk.sliit.it3030.smart_campus_backend;
+package lk.sliit.it3030.smartcampus;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(properties = {
+		"spring.datasource.url=jdbc:h2:mem:smartcampus_test_db",
+		"spring.datasource.driver-class-name=org.h2.Driver",
+		"spring.datasource.username=sa",
+		"spring.datasource.password=",
+		"spring.jpa.database-platform=org.hibernate.dialect.H2Dialect"
+})
 class SmartCampusBackendApplicationTests {
 
 	@Test

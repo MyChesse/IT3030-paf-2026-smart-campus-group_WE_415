@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { bookingService, type Booking } from '../services/bookingService';
 import { Calendar, Clock, Users, AlertCircle, RefreshCw } from 'lucide-react';
 
+const BOOKING_REFRESH_EVENT = 'bookings:refresh';
+
 const MyBookings: React.FC = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -23,6 +25,26 @@ const MyBookings: React.FC = () => {
 
   useEffect(() => {
     fetchMyBookings();
+  }, []);
+
+  useEffect(() => {
+    const refreshBookings = () => {
+      fetchMyBookings();
+    };
+
+    const onStorage = (event: StorageEvent) => {
+      if (event.key === BOOKING_REFRESH_EVENT) {
+        refreshBookings();
+      }
+    };
+
+    window.addEventListener(BOOKING_REFRESH_EVENT, refreshBookings);
+    window.addEventListener('storage', onStorage);
+
+    return () => {
+      window.removeEventListener(BOOKING_REFRESH_EVENT, refreshBookings);
+      window.removeEventListener('storage', onStorage);
+    };
   }, []);
 
   const getStatusColor = (status: string) => {

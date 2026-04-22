@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { bookingService } from '../services/bookingService';
-import { Calendar, Clock, Users, FileText, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 const CreateBooking: React.FC = () => {
   const [formData, setFormData] = useState({
