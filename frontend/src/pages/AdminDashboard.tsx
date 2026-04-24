@@ -1,75 +1,79 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+type SidebarKey = 'users' | 'facility' | 'booking' | 'incidents' | 'notifications';
+
+const menuItems: Array<{ key: SidebarKey; label: string }> = [
+  { key: 'users', label: 'Users' },
+  { key: 'facility', label: 'Facility Catalogue' },
+  { key: 'booking', label: 'Booking' },
+  { key: 'incidents', label: 'Incidents' },
+  { key: 'notifications', label: 'Notifications' },
+];
 
 const AdminDashboard: React.FC = () => {
-  const [facilityType, setFacilityType] = useState("Lecture Hall");
-  const [facilityName, setFacilityName] = useState("");
-  const [facilities, setFacilities] = useState([
-    { type: "Lecture Hall", name: "Hall A" },
-    { type: "Lab", name: "Computer Lab 1" },
-    { type: "Meeting Room", name: "Room 101" },
-    { type: "Equipment", name: "Projector" },
-  ]);
+  const navigate = useNavigate();
+  const [active, setActive] = useState<SidebarKey>('users');
 
-  const handleAddFacility = () => {
-    if (facilityName.trim() !== "") {
-      setFacilities([...facilities, { type: facilityType, name: facilityName }]);
-      setFacilityName("");
+  const handleMenuClick = (key: SidebarKey) => {
+    if (key === 'facility') {
+      navigate('/admin/facility-catalogue');
+      return;
     }
+
+    setActive(key);
+  };
+
+  const getTitle = () => {
+    const selected = menuItems.find((item) => item.key === active);
+    return selected ? selected.label : 'Module';
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-8">
-      <h1 className="text-4xl font-bold text-center text-cyan-400 mb-8">
-        Admin Dashboard
-      </h1>
+    <div className="min-h-screen bg-campus-surface text-slate-100">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 py-10 sm:px-6 lg:grid-cols-[260px_1fr] lg:px-8">
+        <aside className="rounded-3xl border border-campus-line bg-campus-card p-5 shadow-campus-soft">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-campus-accent">
+            Admin Dashboard
+          </p>
+          <h1 className="mt-2 text-2xl font-bold">Control Panel</h1>
 
-      <div className="max-w-3xl mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold text-cyan-400 mb-4">Add Facility</h2>
-        <div className="mb-4">
-          <label className="block text-gray-300 mb-2">Facility Type</label>
-          <select
-            className="w-full p-2 rounded bg-gray-700 text-white"
-            value={facilityType}
-            onChange={(e) => setFacilityType(e.target.value)}
-          >
-            <option value="Lecture Hall">Lecture Hall</option>
-            <option value="Lab">Lab</option>
-            <option value="Meeting Room">Meeting Room</option>
-            <option value="Equipment">Equipment</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-300 mb-2">Facility Name</label>
-          <input
-            type="text"
-            className="w-full p-2 rounded bg-gray-700 text-white"
-            value={facilityName}
-            onChange={(e) => setFacilityName(e.target.value)}
-          />
-        </div>
-        <button
-          className="px-4 py-2 bg-cyan-400 text-black font-semibold rounded-lg shadow-md hover:bg-cyan-500 transition"
-          onClick={handleAddFacility}
-        >
-          Add Facility
-        </button>
-      </div>
+          <div className="mt-6 space-y-2">
+            {menuItems.map((item) => {
+              const isActive = item.key === active;
+              return (
+                <button
+                  key={item.key}
+                  type="button"
+                  onClick={() => handleMenuClick(item.key)}
+                  className={`w-full rounded-xl border px-4 py-2.5 text-left text-sm font-semibold transition ${
+                    isActive
+                      ? 'border-campus-accent bg-campus-accent/15 text-white'
+                      : 'border-campus-line bg-campus-surface/60 text-slate-200 hover:border-campus-accent/70'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              );
+            })}
+          </div>
+        </aside>
 
-      <div className="mt-12">
-        <h2 className="text-2xl font-bold text-cyan-400 mb-4">Existing Facilities</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {facilities.map((facility, index) => (
-            <div
-              key={index}
-              className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-cyan-400 transition"
-            >
-              <h3 className="text-xl font-bold text-white mb-2">
-                {facility.name}
-              </h3>
-              <p className="text-gray-300">Type: {facility.type}</p>
-            </div>
-          ))}
-        </div>
+        <main className="rounded-3xl border border-campus-line bg-campus-card p-8 shadow-campus">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-campus-accent">
+            {getTitle()}
+          </p>
+          <h2 className="mt-2 text-3xl font-bold">Still Constructing</h2>
+          <p className="mt-3 max-w-2xl text-slate-300">
+            This section is still constructing. Please check back soon.
+          </p>
+
+          <div className="mt-8 rounded-2xl border border-campus-line bg-campus-surface/80 p-5">
+            <p className="text-sm text-slate-300">
+              To manage facility items and units, open the Facility Catalogue from the sidebar.
+            </p>
+          </div>
+        </main>
       </div>
     </div>
   );
