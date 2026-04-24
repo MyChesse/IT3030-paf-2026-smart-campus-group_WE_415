@@ -29,6 +29,20 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+const syncTicketIdentity = (user: AuthUser | null) => {
+  if (!user) {
+    localStorage.removeItem('smartCampusUserId');
+    localStorage.removeItem('smartCampusUserRole');
+    localStorage.removeItem('smartCampusUserName');
+    return;
+  }
+
+  const role = user.roles?.[0] ?? 'USER';
+  localStorage.setItem('smartCampusUserId', String(user.id));
+  localStorage.setItem('smartCampusUserRole', role);
+  localStorage.setItem('smartCampusUserName', user.name);
+};
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
@@ -48,9 +62,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       try {
         const res = await authApi.getMe();
-        setUser(res.data as AuthUser);
+        const currentUser = res.data as AuthUser;
+        setUser(currentUser);
+        syncTicketIdentity(currentUser);
       } catch {
         localStorage.removeItem('token');
+        syncTicketIdentity(null);
       } finally {
         setLoading(false);
       }
@@ -64,6 +81,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const data = res.data as AuthUser & { token: string };
     localStorage.setItem('token', data.token);
     setUser(data);
+    syncTicketIdentity(data);
     return data;
   }, []);
 
@@ -72,17 +90,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const response = res.data as AuthUser & { token: string };
     localStorage.setItem('token', response.token);
     setUser(response);
+    syncTicketIdentity(response);
     return response;
   }, []);
 
   const logout = useCallback(() => {
     localStorage.removeItem('token');
     setUser(null);
+    syncTicketIdentity(null);
   }, []);
 
   const refreshUser = useCallback(async () => {
     const res = await authApi.getMe();
-    setUser(res.data as AuthUser);
+    const currentUser = res.data as AuthUser;
+    setUser(currentUser);
+    syncTicketIdentity(currentUser);
   }, []);
 
   const updateProfile = useCallback(async (data: UpdateProfilePayload) => {

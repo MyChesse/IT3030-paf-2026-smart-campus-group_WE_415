@@ -1,13 +1,4 @@
-import axios from 'axios';
-
-const API_BASE_URL = 'http://localhost:8081/api';
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import api from '../api/axiosInstance';
 
 // Booking Interface - Exported correctly
 export interface Booking {
@@ -36,44 +27,44 @@ export interface Resource {
 export const bookingService = {
   // Create a new booking
   createBooking: async (data: any) => {
-    const response = await api.post('/bookings', data);
+    const response = await api.post('/api/bookings', data);
     return response.data;
   },
 
   // Get current user's bookings
   getMyBookings: async () => {
-    const response = await api.get('/bookings/my');
+    const response = await api.get('/api/bookings/my');
     return response.data;
   },
 
   getResources: async () => {
-    const response = await api.get('/resources');
+    const response = await api.get('/api/resources');
     return response.data;
   },
 
 
   // Get all bookings (Admin)
   getAllBookings: async (status?: string) => {
-    const url = status ? `/bookings?status=${status}` : '/bookings';
+    const url = status ? `/api/bookings?status=${status}` : '/api/bookings';
     const response = await api.get(url);
     return response.data;
   },
 
   // Approve booking
   approveBooking: async (id: number, reason: string) => {
-    const response = await api.patch(`/bookings/${id}/approve`, { reason });
+    const response = await api.patch(`/api/bookings/${id}/approve`, { reason });
     return response.data;
   },
 
   // Reject booking
   rejectBooking: async (id: number, reason: string) => {
-    const response = await api.patch(`/bookings/${id}/reject`, { reason });
+    const response = await api.patch(`/api/bookings/${id}/reject`, { reason });
     return response.data;
   },
 
   // Cancel booking
   cancelBooking: async (id: number, reason: string) => {
-    const response = await api.patch(`/bookings/${id}/cancel`, { reason });
+    const response = await api.patch(`/api/bookings/${id}/cancel`, { reason });
     return response.data;
   },
 };

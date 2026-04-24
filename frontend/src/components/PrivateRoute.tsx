@@ -16,3 +16,11 @@ export function AdminRoute() {
   if (!isAuthenticated) return <Navigate to="/login" replace />;
   return isAdmin ? <Outlet /> : <Navigate to="/dashboard" replace />;
 }
+
+export function AdminOrTechnicianRoute() {
+  const { loading, isAuthenticated, isAdmin, isTechnician } = useAuth();
+
+  if (loading) return <div className="loading-spinner">Loading...</div>;
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  return isAdmin || isTechnician ? <Outlet /> : <Navigate to="/tickets/my" replace />;
+}

@@ -4,24 +4,38 @@ import { useAuth } from '../context/AuthContext';
 export default function Sidebar() {
   const { isAdmin, isTechnician } = useAuth();
 
-  const links = [
+  const commonLinks = [
     { to: '/dashboard', label: 'Dashboard', icon: 'DB' },
+    { to: '/notifications', label: 'Notifications', icon: 'NT' },
+    { to: '/profile', label: 'Profile', icon: 'PR' },
+  ];
+
+  const userLinks = [
     { to: '/facilities-overview', label: 'Facilities Overview', icon: 'FO' },
     { to: '/facilities', label: 'Book Facilities', icon: 'FC' },
     { to: '/resources', label: 'Resources', icon: 'RS' },
     { to: '/create-booking', label: 'Create Booking', icon: 'CB' },
     { to: '/bookings', label: 'My Bookings', icon: 'MB' },
-    { to: '/tickets', label: isTechnician && !isAdmin ? 'My Tickets' : 'Tickets', icon: 'TK' },
-    { to: '/notifications', label: 'Notifications', icon: 'NT' },
-    { to: '/profile', label: 'Profile', icon: 'PR' },
+    { to: '/tickets/create', label: 'Create Ticket', icon: 'CT' },
+    { to: '/tickets/my', label: 'My Tickets', icon: 'TK' },
   ];
 
-  if (isAdmin) {
-    links.splice(2, 0, { to: '/admin', label: 'Admin Dashboard', icon: 'AD' });
-    links.splice(3, 0, { to: '/admin/facility-catalogue', label: 'Facility Catalogue', icon: 'FL' });
-    links.splice(4, 0, { to: '/admin/users', label: 'Manage Users', icon: 'MU' });
-    links.splice(5, 0, { to: '/admin-bookings', label: 'Booking Review', icon: 'BR' });
-  }
+  const adminLinks = [
+    { to: '/admin', label: 'Admin Dashboard', icon: 'AD' },
+    { to: '/admin/facility-catalogue', label: 'Facility Catalogue', icon: 'FL' },
+    { to: '/admin/users', label: 'Manage Users', icon: 'MU' },
+    { to: '/admin-bookings', label: 'Booking Review', icon: 'BR' },
+    { to: '/admin/tickets', label: 'Ticket Management', icon: 'TM' },
+  ];
+
+  const technicianLinks = [{ to: '/technician/tickets', label: 'Assigned Tickets', icon: 'AT' }];
+
+  const links = [
+    commonLinks[0],
+    ...(isAdmin ? adminLinks : userLinks),
+    ...(!isAdmin && isTechnician ? technicianLinks : []),
+    ...commonLinks.slice(1),
+  ];
 
   return (
     <aside className="sidebar">

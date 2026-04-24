@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { bookingService, type Booking } from '../services/bookingService';
 import { CheckCircle, XCircle, AlertTriangle, RefreshCw } from 'lucide-react';
 
+const BOOKING_REFRESH_EVENT = 'bookings:refresh';
+
+const notifyBookingRefresh = () => {
+  window.dispatchEvent(new Event(BOOKING_REFRESH_EVENT));
+  localStorage.setItem(BOOKING_REFRESH_EVENT, String(Date.now()));
+};
+
 const AdminBookings: React.FC = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
@@ -35,6 +42,7 @@ const AdminBookings: React.FC = () => {
 
     try {
       await bookingService.approveBooking(id, reason);
+      notifyBookingRefresh();
       alert("✅ Booking approved successfully!");
       fetchBookings();
     } catch (err) {
@@ -51,6 +59,7 @@ const AdminBookings: React.FC = () => {
 
     try {
       await bookingService.rejectBooking(id, reason);
+      notifyBookingRefresh();
       alert("❌ Booking rejected successfully!");
       fetchBookings();
     } catch (err) {
@@ -64,6 +73,7 @@ const AdminBookings: React.FC = () => {
 
     try {
       await bookingService.cancelBooking(id, reason);
+      notifyBookingRefresh();
       alert("Booking cancelled successfully!");
       fetchBookings();
     } catch (err) {

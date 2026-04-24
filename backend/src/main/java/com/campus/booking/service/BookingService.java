@@ -8,6 +8,8 @@ import com.campus.booking.exception.BookingConflictException;
 import com.campus.booking.repository.BookingRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -91,8 +93,12 @@ public class BookingService {
     }
 
     @Transactional
-    public BookingResponseDto cancelBooking(Long bookingId, String reason, Long userId) {
+    public BookingResponseDto cancelBooking(Long bookingId, String reason, Long userId, boolean isAdminLike) {
         Booking booking = findBooking(bookingId);
+
+        if (!isAdminLike && !booking.getUserId().equals(userId)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only cancel your own bookings");
+        }
 
         if (booking.getStatus() != BookingStatus.APPROVED) {
             throw new IllegalArgumentException("Only APPROVED bookings can be cancelled");

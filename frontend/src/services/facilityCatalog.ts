@@ -1,13 +1,4 @@
-import axios from 'axios';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '/api';
-
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+import api from '../api/axiosInstance';
 
 export type FacilityCategoryKey = 'lectureHalls' | 'labs' | 'meetingRooms';
 
@@ -78,7 +69,7 @@ export const emptyCatalog = (): FacilityCatalog => ({
 });
 
 export const getFacilityCatalog = async (): Promise<FacilityCatalog> => {
-  const response = await api.get('/facilities/catalog');
+  const response = await api.get('/api/facilities/catalog');
   const data = response.data ?? {};
 
   return {
@@ -92,7 +83,7 @@ export const createFacilityItem = async (
   category: FacilityCategoryKey,
   payload: { name: string; description: string }
 ): Promise<FacilityItem> => {
-  const response = await api.post(`/facilities/${categoryMeta[category].apiValue}/items`, payload);
+  const response = await api.post(`/api/facilities/${categoryMeta[category].apiValue}/items`, payload);
   return mapItem(response.data);
 };
 
@@ -101,7 +92,7 @@ export const updateFacilityItem = async (
   itemId: number,
   payload: { name: string; description: string }
 ): Promise<FacilityItem> => {
-  const response = await api.put(`/facilities/${categoryMeta[category].apiValue}/items/${itemId}`, payload);
+  const response = await api.put(`/api/facilities/${categoryMeta[category].apiValue}/items/${itemId}`, payload);
   return mapItem(response.data);
 };
 
@@ -109,7 +100,7 @@ export const deleteFacilityItem = async (
   category: FacilityCategoryKey,
   itemId: number
 ): Promise<void> => {
-  await api.delete(`/facilities/${categoryMeta[category].apiValue}/items/${itemId}`);
+  await api.delete(`/api/facilities/${categoryMeta[category].apiValue}/items/${itemId}`);
 };
 
 export const createFacilityUnit = async (
@@ -125,7 +116,7 @@ export const createFacilityUnit = async (
   }
 ): Promise<FacilityItem> => {
   const response = await api.post(
-    `/facilities/${categoryMeta[category].apiValue}/items/${itemId}/units`,
+    `/api/facilities/${categoryMeta[category].apiValue}/items/${itemId}/units`,
     payload
   );
   return mapItem(response.data);
@@ -145,7 +136,7 @@ export const updateFacilityUnit = async (
   }
 ): Promise<FacilityItem> => {
   const response = await api.put(
-    `/facilities/${categoryMeta[category].apiValue}/items/${itemId}/units/${unitId}`,
+    `/api/facilities/${categoryMeta[category].apiValue}/items/${itemId}/units/${unitId}`,
     payload
   );
   return mapItem(response.data);

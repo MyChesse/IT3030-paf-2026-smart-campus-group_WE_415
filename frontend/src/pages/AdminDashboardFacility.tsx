@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import {
@@ -34,6 +35,19 @@ type UnavailabilityPrompt = {
   itemName: string;
   unitName: string;
   reason: string;
+};
+
+const extractErrorMessage = (error: unknown, fallback: string) => {
+  if (axios.isAxiosError(error)) {
+    const data = error.response?.data as { message?: string; error?: string } | undefined;
+    return data?.message || data?.error || error.message || fallback;
+  }
+
+  if (error instanceof Error) {
+    return error.message;
+  }
+
+  return fallback;
 };
 
 const AdminDashboardFacility: React.FC = () => {
@@ -114,9 +128,7 @@ const AdminDashboardFacility: React.FC = () => {
       await confirmAction.action();
       setConfirmAction(null);
     } catch (runError) {
-      setStatusMessage(
-        runError instanceof Error ? runError.message : 'Action failed. Please try again.'
-      );
+      setStatusMessage(extractErrorMessage(runError, 'Action failed. Please try again.'));
     } finally {
       setActionBusy(false);
     }
@@ -374,11 +386,7 @@ const AdminDashboardFacility: React.FC = () => {
       setStatusMessage(`${item.name} / ${unit.name}: unavailability reason saved.`);
       setUnavailabilityPrompt(null);
     } catch (saveError) {
-      setStatusMessage(
-        saveError instanceof Error
-          ? saveError.message
-          : 'Failed to save unavailability reason.'
-      );
+      setStatusMessage(extractErrorMessage(saveError, 'Failed to save unavailability reason.'));
     } finally {
       setReasonSaving(false);
     }
