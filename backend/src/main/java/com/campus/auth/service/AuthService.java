@@ -1,8 +1,8 @@
-package lk.sliit.it3030.smartcampus.auth.service;
+package com.campus.auth.service;
 
-import lk.sliit.it3030.smartcampus.auth.dto.AuthRequests;
-import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
-import lk.sliit.it3030.smartcampus.auth.repository.AppUserRepository;
+import com.campus.auth.dto.AuthRequests;
+import com.campus.auth.entity.AppUser;
+import com.campus.auth.repository.AppUserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

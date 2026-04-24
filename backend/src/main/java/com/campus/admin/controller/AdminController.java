@@ -1,10 +1,10 @@
-package lk.sliit.it3030.smartcampus.admin.controller;
+package com.campus.admin.controller;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
-import lk.sliit.it3030.smartcampus.auth.repository.AppUserRepository;
-import lk.sliit.it3030.smartcampus.auth.service.AuthService;
+import com.campus.auth.entity.AppUser;
+import com.campus.auth.repository.AppUserRepository;
+import com.campus.auth.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

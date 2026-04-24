@@ -1,4 +1,4 @@
-package lk.sliit.it3030.smartcampus.resources.entity;
+package com.campus.resources.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

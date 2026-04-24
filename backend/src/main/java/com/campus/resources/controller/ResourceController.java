@@ -1,8 +1,8 @@
-package lk.sliit.it3030.smartcampus.resources.controller;
+package com.campus.resources.controller;
 
 import jakarta.validation.Valid;
-import lk.sliit.it3030.smartcampus.resources.entity.CampusResource;
-import lk.sliit.it3030.smartcampus.resources.repository.CampusResourceRepository;
+import com.campus.resources.entity.CampusResource;
+import com.campus.resources.repository.CampusResourceRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

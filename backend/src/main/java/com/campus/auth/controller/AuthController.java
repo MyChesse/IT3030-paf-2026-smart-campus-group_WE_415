@@ -1,9 +1,9 @@
-package lk.sliit.it3030.smartcampus.auth.controller;
+package com.campus.auth.controller;
 
 import jakarta.validation.Valid;
-import lk.sliit.it3030.smartcampus.auth.dto.AuthRequests;
-import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
-import lk.sliit.it3030.smartcampus.auth.service.AuthService;
+import com.campus.auth.dto.AuthRequests;
+import com.campus.auth.entity.AppUser;
+import com.campus.auth.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

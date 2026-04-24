@@ -1,6 +1,6 @@
-package lk.sliit.it3030.smartcampus.resources.repository;
+package com.campus.resources.repository;
 
-import lk.sliit.it3030.smartcampus.resources.entity.CampusResource;
+import com.campus.resources.entity.CampusResource;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

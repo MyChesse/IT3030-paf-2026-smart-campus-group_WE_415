@@ -1,4 +1,4 @@
-package lk.sliit.it3030.smartcampus.auth.security;
+package com.campus.auth.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

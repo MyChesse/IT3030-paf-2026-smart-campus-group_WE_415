@@ -1,11 +1,11 @@
-package lk.sliit.it3030.smartcampus.auth.security;
+package com.campus.auth.security;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
-import lk.sliit.it3030.smartcampus.auth.repository.AppUserRepository;
-import lk.sliit.it3030.smartcampus.auth.service.AuthService;
+import com.campus.auth.entity.AppUser;
+import com.campus.auth.repository.AppUserRepository;
+import com.campus.auth.service.AuthService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;

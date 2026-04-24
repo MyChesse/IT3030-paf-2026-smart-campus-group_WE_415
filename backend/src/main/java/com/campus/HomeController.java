@@ -1,4 +1,4 @@
-package lk.sliit.it3030.smartcampus;
+package com.campus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

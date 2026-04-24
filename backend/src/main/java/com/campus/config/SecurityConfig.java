@@ -1,7 +1,7 @@
-package lk.sliit.it3030.smartcampus.config;
+package com.campus.config;
 
-import lk.sliit.it3030.smartcampus.auth.security.OAuth2LoginFailureHandler;
-import lk.sliit.it3030.smartcampus.auth.security.OAuth2LoginSuccessHandler;
+import com.campus.auth.security.OAuth2LoginFailureHandler;
+import com.campus.auth.security.OAuth2LoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;

@@ -1,12 +1,12 @@
-package lk.sliit.it3030.smartcampus.init;
+package com.campus.init;
 
 import jakarta.annotation.PostConstruct;
-import lk.sliit.it3030.smartcampus.auth.entity.AppUser;
-import lk.sliit.it3030.smartcampus.auth.repository.AppUserRepository;
-import lk.sliit.it3030.smartcampus.notifications.entity.AppNotification;
-import lk.sliit.it3030.smartcampus.notifications.repository.AppNotificationRepository;
-import lk.sliit.it3030.smartcampus.resources.entity.CampusResource;
-import lk.sliit.it3030.smartcampus.resources.repository.CampusResourceRepository;
+import com.campus.auth.entity.AppUser;
+import com.campus.auth.repository.AppUserRepository;
+import com.campus.notifications.entity.AppNotification;
+import com.campus.notifications.repository.AppNotificationRepository;
+import com.campus.resources.entity.CampusResource;
+import com.campus.resources.repository.CampusResourceRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

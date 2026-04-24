@@ -1,8 +1,8 @@
-package lk.sliit.it3030.smartcampus.notifications.controller;
+package com.campus.notifications.controller;
 
-import lk.sliit.it3030.smartcampus.auth.service.AuthService;
-import lk.sliit.it3030.smartcampus.notifications.entity.AppNotification;
-import lk.sliit.it3030.smartcampus.notifications.repository.AppNotificationRepository;
+import com.campus.auth.service.AuthService;
+import com.campus.notifications.entity.AppNotification;
+import com.campus.notifications.repository.AppNotificationRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;

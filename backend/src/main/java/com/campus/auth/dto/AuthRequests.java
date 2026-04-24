@@ -1,4 +1,4 @@
-package lk.sliit.it3030.smartcampus.auth.dto;
+package com.campus.auth.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package lk.sliit.it3030.smartcampus.notifications.entity;
+package com.campus.notifications.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

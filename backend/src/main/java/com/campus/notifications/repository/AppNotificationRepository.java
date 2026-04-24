@@ -1,6 +1,6 @@
-package lk.sliit.it3030.smartcampus.notifications.repository;
+package com.campus.notifications.repository;
 
-import lk.sliit.it3030.smartcampus.notifications.entity.AppNotification;
+import com.campus.notifications.entity.AppNotification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
