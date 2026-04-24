@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useNotifications } from '../hooks/useNotifications';
+import { bookingService, type Booking } from '../services/bookingService';
+import { ticketService } from '../services/ticketService';
+import type { IncidentTicket } from '../types/ticket';
 
 type SidebarKey = 'users' | 'facility' | 'booking' | 'incidents' | 'notifications';
 
@@ -38,7 +42,45 @@ const menuItems: Array<{ key: SidebarKey; label: string; path?: string; descript
 
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
+  const { unreadCount } = useNotifications();
   const [active, setActive] = useState<SidebarKey>('users');
+  const [bookings, setBookings] = useState<Booking[]>([]);
+  const [tickets, setTickets] = useState<IncidentTicket[]>([]);
+  const [summaryLoading, setSummaryLoading] = useState(true);
+  const [summaryError, setSummaryError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadSummary = async () => {
+      try {
+        setSummaryLoading(true);
+        setSummaryError(null);
+        const [bookingData, ticketData] = await Promise.all([
+          bookingService.getAllBookings(),
+          ticketService.getAllTickets({}),
+        ]);
+        setBookings(bookingData as Booking[]);
+        setTickets(ticketData as IncidentTicket[]);
+      } catch {
+        setBookings([]);
+        setTickets([]);
+        setSummaryError('Unable to load live admin dashboard stats right now.');
+      } finally {
+        setSummaryLoading(false);
+      }
+    };
+
+    void loadSummary();
+  }, []);
+
+  const bookingPendingCount = useMemo(
+    () => bookings.filter((booking) => booking.status === 'PENDING').length,
+    [bookings]
+  );
+
+  const ticketOpenCount = useMemo(
+    () => tickets.filter((ticket) => ticket.status === 'OPEN' || ticket.status === 'IN_PROGRESS').length,
+    [tickets]
+  );
 
   const handleMenuClick = (key: SidebarKey) => {
     const selected = menuItems.find((item) => item.key === key);
@@ -104,12 +146,40 @@ const AdminDashboard: React.FC = () => {
 
             <button
               type="button"
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/admin')}
               className="rounded-xl border border-campus-line px-4 py-2 text-sm font-semibold text-slate-200 hover:border-campus-accent hover:text-campus-accent"
             >
-              Back to Dashboard
+              Refresh Admin View
             </button>
           </div>
+
+          <div className="mt-8 dashboard-kpi-grid">
+            <article className="kpi-card">
+              <p className="kpi-card__label">Total Bookings</p>
+              <h3 className="kpi-card__value">{summaryLoading ? '...' : bookings.length}</h3>
+              <p className="kpi-card__meta">All reservation requests</p>
+            </article>
+
+            <article className="kpi-card">
+              <p className="kpi-card__label">Pending Bookings</p>
+              <h3 className="kpi-card__value">{summaryLoading ? '...' : bookingPendingCount}</h3>
+              <p className="kpi-card__meta">Waiting for admin approval</p>
+            </article>
+
+            <article className="kpi-card">
+              <p className="kpi-card__label">Active Tickets</p>
+              <h3 className="kpi-card__value">{summaryLoading ? '...' : ticketOpenCount}</h3>
+              <p className="kpi-card__meta">Open or in progress</p>
+            </article>
+
+            <article className="kpi-card">
+              <p className="kpi-card__label">Unread Notifications</p>
+              <h3 className="kpi-card__value">{unreadCount}</h3>
+              <p className="kpi-card__meta">Need your attention</p>
+            </article>
+          </div>
+
+          {summaryError && <p className="dashboard-empty-note mt-3">{summaryError}</p>}
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {menuItems.map((item) => (

@@ -1,6 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { notificationApi } from '../api/notificationApi';
+import { useAuth } from './AuthContext';
 
 export interface NotificationItem {
   id: number;
@@ -31,6 +32,7 @@ interface NotificationContextValue {
 const NotificationContext = createContext<NotificationContextValue | null>(null);
 
 export function NotificationProvider({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuth();
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -66,6 +68,14 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
   }, []);
 
   useEffect(() => {
+    if (!isAuthenticated) {
+      setNotifications([]);
+      setUnreadCount(0);
+      setPage(0);
+      setTotalPages(0);
+      return;
+    }
+
     void fetchNotifications(0);
     void fetchUnreadCount();
 
@@ -75,7 +85,7 @@ export function NotificationProvider({ children }: { children: React.ReactNode }
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [fetchNotifications, fetchUnreadCount]);
+  }, [isAuthenticated, fetchNotifications, fetchUnreadCount]);
 
   const markAsRead = useCallback(async (id: number) => {
     await notificationApi.markAsRead(id);

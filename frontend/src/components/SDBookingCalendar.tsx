@@ -129,7 +129,7 @@ const SDBookingCalendar: React.FC<SDBookingCalendarProps> = ({ onDateSelect }) =
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-96 bg-white rounded-2xl shadow-lg">
+      <div className="booking-calendar-panel flex justify-center items-center h-96">
         <Loader2 className="w-12 h-12 text-blue-600 animate-spin" />
         <p className="ml-3 text-gray-600">Loading calendar...</p>
       </div>
@@ -143,8 +143,8 @@ const SDBookingCalendar: React.FC<SDBookingCalendarProps> = ({ onDateSelect }) =
   const hasResources = resources.length > 0;
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-5">
+    <div className="booking-calendar-panel overflow-hidden">
+      <div className="booking-calendar-panel__header px-6 py-5">
         <div className="flex items-center gap-3">
           <CalendarIcon className="w-7 h-7 text-white" />
           <h2 className="text-xl font-bold text-white">Resource Booking Calendar</h2>
@@ -153,13 +153,13 @@ const SDBookingCalendar: React.FC<SDBookingCalendarProps> = ({ onDateSelect }) =
       </div>
 
       {/* Resource Filter */}
-      <div className="p-5 border-b border-gray-200 bg-gray-50">
+      <div className="booking-calendar-filter p-5">
         <div className="flex flex-wrap items-center gap-4">
           <label className="text-sm font-semibold text-gray-700">Filter by Resource:</label>
           <select
             value={selectedResource}
             onChange={(e) => setSelectedResource(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-xl bg-white text-sm"
+            className="booking-calendar-select px-4 py-2 border border-gray-300 rounded-xl bg-white text-sm"
           >
             <option value="all">All Resources</option>
             {hasResources ? (
@@ -173,7 +173,7 @@ const SDBookingCalendar: React.FC<SDBookingCalendarProps> = ({ onDateSelect }) =
             )}
           </select>
 
-          <div className="flex gap-3 ml-auto">
+          <div className="booking-calendar-legend flex gap-3 ml-auto">
             <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-green-500"></div><span className="text-xs">Approved</span></div>
             <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-orange-500"></div><span className="text-xs">Pending</span></div>
             <div className="flex items-center gap-1.5"><div className="w-3 h-3 rounded-full bg-red-500"></div><span className="text-xs">Rejected</span></div>
@@ -182,7 +182,7 @@ const SDBookingCalendar: React.FC<SDBookingCalendarProps> = ({ onDateSelect }) =
         </div>
       </div>
 
-      <div className="p-5">
+      <div className="p-5 booking-calendar-theme">
         {/* FullCalendar */}
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}

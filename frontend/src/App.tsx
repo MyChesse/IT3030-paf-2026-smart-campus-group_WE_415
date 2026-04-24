@@ -20,10 +20,6 @@ import DashboardPage from './DashboardPage';
 import NotificationsPage from './notifications/NotificationsPage';
 import AdminPage from './admin/AdminPage';
 
-import ResourceList from './resources/ResourceList';
-import ResourceForm from './resources/ResourceForm';
-import ResourceDetail from './resources/ResourceDetail';
-
 import Home from './pages/Home';
 import CreateBooking from './pages/CreateBooking';
 import MyBookings from './pages/MyBookings';
@@ -61,11 +57,6 @@ function App() {
 
             <Route path="/facilities-overview" element={<FacilitiesOverview />} />
             <Route path="/facilities" element={<Facilities />} />
-
-            <Route path="/resources" element={<ResourceList />} />
-            <Route path="/resources/new" element={<ResourceForm />} />
-            <Route path="/resources/:id" element={<ResourceDetail />} />
-            <Route path="/resources/:id/edit" element={<ResourceForm />} />
 
             <Route path="/home" element={<Home />} />
             <Route path="/bookings" element={<MyBookings />} />

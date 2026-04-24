@@ -6,6 +6,7 @@ import com.campus.booking.entity.Booking;
 import com.campus.booking.entity.BookingStatus;
 import com.campus.booking.exception.BookingConflictException;
 import com.campus.booking.repository.BookingRepository;
+import com.campus.notifications.service.NotificationService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,9 +19,11 @@ import java.util.List;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
+    private final NotificationService notificationService;
 
-    public BookingService(BookingRepository bookingRepository) {
+    public BookingService(BookingRepository bookingRepository, NotificationService notificationService) {
         this.bookingRepository = bookingRepository;
+        this.notificationService = notificationService;
     }
 
     @Transactional
@@ -72,7 +75,12 @@ public class BookingService {
         booking.setStatus(BookingStatus.APPROVED);
         booking.setRejectionReason(null);
         booking.setCancellationReason(null);
-        return toDto(bookingRepository.save(booking));
+
+        Booking saved = bookingRepository.save(booking);
+        notifyBookingOwner(saved, "BOOKING_APPROVED", "Booking approved",
+            "Your booking request for resource #" + saved.getResourceId() + " has been approved.");
+
+        return toDto(saved);
     }
 
     @Transactional
@@ -89,7 +97,12 @@ public class BookingService {
 
         booking.setStatus(BookingStatus.REJECTED);
         booking.setRejectionReason(reason);
-        return toDto(bookingRepository.save(booking));
+
+    Booking saved = bookingRepository.save(booking);
+    notifyBookingOwner(saved, "BOOKING_REJECTED", "Booking rejected",
+        buildStatusMessage(saved, "rejected", reason));
+
+    return toDto(saved);
     }
 
     @Transactional
@@ -106,7 +119,12 @@ public class BookingService {
 
         booking.setStatus(BookingStatus.CANCELLED);
         booking.setCancellationReason(reason != null ? reason : "Cancelled by user");
-        return toDto(bookingRepository.save(booking));
+
+    Booking saved = bookingRepository.save(booking);
+    notifyBookingOwner(saved, "BOOKING_CANCELLED", "Booking cancelled",
+        buildStatusMessage(saved, "cancelled", saved.getCancellationReason()));
+
+    return toDto(saved);
     }
 
     private Booking findBooking(Long bookingId) {
@@ -129,5 +147,23 @@ public class BookingService {
                 booking.getCreatedAt(),
                 booking.getUpdatedAt()
         );
+    }
+
+    private void notifyBookingOwner(Booking booking, String type, String title, String message) {
+        notificationService.createNotification(booking.getUserId(), type, title, message);
+    }
+
+    private String buildStatusMessage(Booking booking, String status, String reason) {
+        StringBuilder message = new StringBuilder("Your booking request for resource #")
+                .append(booking.getResourceId())
+                .append(" has been ")
+                .append(status)
+                .append('.');
+
+        if (reason != null && !reason.trim().isEmpty()) {
+            message.append(" Reason: ").append(reason.trim());
+        }
+
+        return message.toString();
     }
 }

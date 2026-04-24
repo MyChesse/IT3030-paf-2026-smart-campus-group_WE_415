@@ -13,7 +13,6 @@ export default function Sidebar() {
   const userLinks = [
     { to: '/facilities-overview', label: 'Facilities Overview', icon: 'FO' },
     { to: '/facilities', label: 'Book Facilities', icon: 'FC' },
-    { to: '/resources', label: 'Resources', icon: 'RS' },
     { to: '/create-booking', label: 'Create Booking', icon: 'CB' },
     { to: '/bookings', label: 'My Bookings', icon: 'MB' },
     { to: '/tickets/create', label: 'Create Ticket', icon: 'CT' },
@@ -31,7 +30,7 @@ export default function Sidebar() {
   const technicianLinks = [{ to: '/technician/tickets', label: 'Assigned Tickets', icon: 'AT' }];
 
   const links = [
-    commonLinks[0],
+    ...(!isAdmin ? [commonLinks[0]] : []),
     ...(isAdmin ? adminLinks : userLinks),
     ...(!isAdmin && isTechnician ? technicianLinks : []),
     ...commonLinks.slice(1),

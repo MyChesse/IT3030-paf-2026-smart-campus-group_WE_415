@@ -37,6 +37,7 @@
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/notifications/controller/NotificationController.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/notifications/entity/AppNotification.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/notifications/repository/AppNotificationRepository.java
+/Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/notifications/service/NotificationService.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/resources/controller/ResourceController.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/resources/entity/CampusResource.java
 /Users/isuruadikari/Downloads/smart cam/IT3030-paf-2026-smart-campus-group_WE_415/backend/src/main/java/com/campus/resources/repository/CampusResourceRepository.java

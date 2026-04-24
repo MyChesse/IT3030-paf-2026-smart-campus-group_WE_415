@@ -5,7 +5,6 @@ import NotificationPanel from './NotificationPanel';
 
 const PAGE_TITLES: Record<string, string> = {
   '/dashboard': 'Dashboard',
-  '/resources': 'Resources',
   '/bookings': 'Bookings',
   '/create-booking': 'Create Booking',
   '/my-bookings': 'My Bookings',

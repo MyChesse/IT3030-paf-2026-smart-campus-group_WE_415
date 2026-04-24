@@ -11,20 +11,20 @@
 .ticket-heading h2 {
   margin: 0;
   font-size: 1.75rem;
-  color: #122034;
+  color: #eaf2fd;
 }
 
 .ticket-heading p {
   margin: 0.4rem 0 0;
-  color: #4d5a6b;
+  color: #9db2cc;
 }
 
 .ticket-card {
-  background: #fff;
-  border: 1px solid #dde4ee;
+  background: #10233f;
+  border: 1px solid #244567;
   border-radius: 14px;
   padding: 1rem;
-  box-shadow: 0 8px 20px rgba(16, 36, 66, 0.06);
+  box-shadow: 0 18px 30px -24px rgba(0, 0, 0, 0.85);
 }
 
 .ticket-list {
@@ -40,8 +40,8 @@
 
 .ticket-table-wrapper {
   overflow-x: auto;
-  background: #fff;
-  border: 1px solid #dde4ee;
+  background: #10233f;
+  border: 1px solid #244567;
   border-radius: 14px;
 }
 
@@ -52,10 +52,11 @@
 
 .ticket-table th,
 .ticket-table td {
-  border-bottom: 1px solid #edf1f6;
+  border-bottom: 1px solid #244567;
   text-align: left;
   padding: 0.8rem;
   font-size: 0.92rem;
+  color: #d4e4f7;
 }
 
 .ticket-form {
@@ -71,7 +72,7 @@
 
 .ticket-form label {
   font-size: 0.86rem;
-  color: #2d3e55;
+  color: #b8cce5;
   display: block;
   margin-bottom: 0.3rem;
   font-weight: 600;
@@ -81,11 +82,13 @@
 .ticket-form textarea,
 .ticket-form select {
   width: 100%;
-  border: 1px solid #c9d5e3;
+  border: 1px solid #244567;
   border-radius: 10px;
   padding: 0.6rem 0.7rem;
   font-size: 0.95rem;
   box-sizing: border-box;
+  background: #0e1f35;
+  color: #e6f0fb;
 }
 
 .ticket-form textarea {
@@ -109,17 +112,17 @@
 }
 
 .ticket-button.primary {
-  background: #0f5fd8;
-  color: #fff;
+  background: #ff9f43;
+  color: #1f1608;
 }
 
 .ticket-button.secondary {
-  background: #e8eef7;
-  color: #13304f;
+  background: #173150;
+  color: #d5e4f7;
 }
 
 .ticket-button.danger {
-  background: #d84a3c;
+  background: #ff6f61;
   color: #fff;
 }
 
@@ -131,11 +134,11 @@
   font-weight: 700;
 }
 
-.ticket-badge.OPEN { background: #e7f0ff; color: #184f9f; }
-.ticket-badge.IN_PROGRESS { background: #fff3df; color: #935f00; }
-.ticket-badge.RESOLVED { background: #e3f9ec; color: #166f4a; }
-.ticket-badge.CLOSED { background: #eceef2; color: #44505f; }
-.ticket-badge.REJECTED { background: #ffe4e0; color: #982d21; }
+.ticket-badge.OPEN { background: rgba(59, 130, 246, 0.2); color: #bfdbfe; }
+.ticket-badge.IN_PROGRESS { background: rgba(251, 191, 36, 0.2); color: #fde68a; }
+.ticket-badge.RESOLVED { background: rgba(45, 212, 191, 0.2); color: #99f6e4; }
+.ticket-badge.CLOSED { background: rgba(148, 163, 184, 0.24); color: #cbd5e1; }
+.ticket-badge.REJECTED { background: rgba(255, 111, 97, 0.18); color: #ffd1cb; }
 
 .priority-badge {
   display: inline-block;
@@ -145,10 +148,10 @@
   font-weight: 700;
 }
 
-.priority-badge.LOW { background: #e6f4ff; color: #115f9e; }
-.priority-badge.MEDIUM { background: #fff5d9; color: #9a6a00; }
-.priority-badge.HIGH { background: #ffe9d9; color: #b44e08; }
-.priority-badge.CRITICAL { background: #ffdfdf; color: #a11717; }
+.priority-badge.LOW { background: rgba(59, 130, 246, 0.18); color: #bfdbfe; }
+.priority-badge.MEDIUM { background: rgba(251, 191, 36, 0.18); color: #fde68a; }
+.priority-badge.HIGH { background: rgba(255, 159, 67, 0.22); color: #ffd39b; }
+.priority-badge.CRITICAL { background: rgba(255, 111, 97, 0.2); color: #ffd1cb; }
 
 .ticket-comments {
   display: grid;
@@ -157,7 +160,7 @@
 }
 
 .ticket-comment-item {
-  border: 1px solid #e2e8f1;
+  border: 1px solid #244567;
   border-radius: 10px;
   padding: 0.65rem;
 }
@@ -166,7 +169,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
-  color: #4a5f77;
+  color: #9db2cc;
   font-size: 0.86rem;
   margin-top: 0.45rem;
 }
@@ -190,7 +193,7 @@
   height: 90px;
   object-fit: cover;
   border-radius: 8px;
-  border: 1px solid #d4dcea;
+  border: 1px solid #244567;
 }
 
 .modal-overlay {
@@ -203,16 +206,16 @@
 }
 
 .modal-card {
-  background: #fff;
+  background: #10233f;
   width: min(92vw, 430px);
   border-radius: 12px;
-  border: 1px solid #d7e0eb;
+  border: 1px solid #244567;
   padding: 1rem;
 }
 
 .inline-error {
   margin-top: 0.25rem;
-  color: #b42318;
+  color: #ffd1cb;
   font-size: 0.8rem;
 }
 
@@ -224,15 +227,15 @@
 }
 
 .message-banner.error {
-  background: #ffe8e6;
-  border: 1px solid #ffc9c2;
-  color: #932d22;
+  background: rgba(255, 111, 97, 0.16);
+  border: 1px solid rgba(255, 111, 97, 0.4);
+  color: #ffd1cb;
 }
 
 .message-banner.success {
-  background: #e8f9ee;
-  border: 1px solid #c1ebcf;
-  color: #1b6742;
+  background: rgba(45, 212, 191, 0.14);
+  border: 1px solid rgba(45, 212, 191, 0.38);
+  color: #b8fff2;
 }
 
 @media (max-width: 768px) {

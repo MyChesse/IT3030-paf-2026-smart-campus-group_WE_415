@@ -16,7 +16,11 @@ export const getCurrentUser = () => {
 };
 
 apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
   const { userId, role, userName } = getCurrentUser();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
   config.headers['X-User-Id'] = userId;
   config.headers['X-User-Role'] = role;
   config.headers['X-User-Name'] = userName;

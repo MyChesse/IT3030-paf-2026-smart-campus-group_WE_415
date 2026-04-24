@@ -6,7 +6,7 @@ import { useNotifications } from '../hooks/useNotifications';
 export default function NotificationPanel() {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement | null>(null);
-  const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification } = useNotifications();
+  const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification, refresh } = useNotifications();
 
   useEffect(() => {
     const handler = (event: MouseEvent) => {
@@ -18,6 +18,12 @@ export default function NotificationPanel() {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, []);
+
+  useEffect(() => {
+    if (open) {
+      refresh();
+    }
+  }, [open, refresh]);
 
   const preview = notifications.slice(0, 5);
 

@@ -66,92 +66,92 @@ const CreateBooking: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="booking-create-page">
+      <div className="booking-create-grid">
         {/* Booking Form */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="p-3 bg-blue-100 rounded-xl">
-              <Plus className="w-8 h-8 text-blue-600" />
+        <div className="booking-form-panel">
+          <div className="booking-form-header">
+            <div className="booking-form-icon">
+              <Plus className="w-8 h-8" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Create New Booking</h1>
-              <p className="text-gray-600 mt-1">Request a room, lab, or equipment</p>
+              <h1 className="booking-form-title">Create New Booking</h1>
+              <p className="booking-form-subtitle">Request a room, lab, or equipment</p>
             </div>
           </div>
 
           {message && (
-            <div className={`mb-6 p-4 rounded-xl flex items-center gap-3 ${
-              message.type === 'success' 
-                ? 'bg-green-50 text-green-800 border border-green-200' 
-                : 'bg-red-50 text-red-800 border border-red-200'
+            <div className={`booking-form-alert ${
+              message.type === 'success'
+                ? 'booking-form-alert--success'
+                : 'booking-form-alert--error'
             }`}>
               {message.type === 'success' ? '✓' : '⚠'} {message.text}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="booking-theme-form">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Resource ID</label>
+              <label className="booking-field-label">Resource ID</label>
               <input
                 type="number"
                 name="resourceId"
                 value={formData.resourceId}
                 onChange={handleChange}
                 required
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                className="booking-field-input"
                 placeholder="Enter Resource ID (e.g. 101)"
               />
-              <p className="text-xs text-gray-500 mt-1">Lecture Hall: 101, 102, 103 | Labs: 201, 202 | Meeting Rooms: 301, 302</p>
+              <p className="booking-field-help">Lecture Hall: 101, 102, 103 | Labs: 201, 202 | Meeting Rooms: 301, 302</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="booking-field-grid">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Start Time</label>
+                <label className="booking-field-label">Start Time</label>
                 <input
                   type="datetime-local"
                   name="startTime"
                   value={formData.startTime}
                   onChange={handleChange}
                   required
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="booking-field-input"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">End Time</label>
+                <label className="booking-field-label">End Time</label>
                 <input
                   type="datetime-local"
                   name="endTime"
                   value={formData.endTime}
                   onChange={handleChange}
                   required
-                  className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                  className="booking-field-input"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Purpose</label>
+              <label className="booking-field-label">Purpose</label>
               <textarea
                 name="purpose"
                 value={formData.purpose}
                 onChange={handleChange}
                 required
                 rows={4}
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none resize-y"
+                className="booking-field-input booking-field-textarea"
                 placeholder="Describe the purpose of this booking..."
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Expected Attendees (Optional)</label>
+              <label className="booking-field-label">Expected Attendees (Optional)</label>
               <input
                 type="number"
                 name="expectedAttendees"
                 value={formData.expectedAttendees}
                 onChange={handleChange}
-                className="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"
+                className="booking-field-input"
                 placeholder="Number of expected attendees"
               />
             </div>
@@ -159,7 +159,7 @@ const CreateBooking: React.FC = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-lg"
+              className="booking-submit-btn"
             >
               {loading ? 'Creating Booking...' : 'Submit Booking Request'}
             </button>
@@ -167,7 +167,7 @@ const CreateBooking: React.FC = () => {
         </div>
 
         {/* Calendar Component */}
-        <div>
+        <div className="booking-calendar-wrap">
           <SDBookingCalendar onDateSelect={handleDateSelect} />
         </div>
       </div>
