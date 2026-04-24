@@ -1,12 +1,12 @@
 package lk.sliit.it3030.smartcampus.booking;
 
-import lk.sliit.it3030.smartcampus.booking.dto.BookingCreateRequestDto;
-import lk.sliit.it3030.smartcampus.booking.dto.BookingResponseDto;
-import lk.sliit.it3030.smartcampus.booking.entity.Booking;
-import lk.sliit.it3030.smartcampus.booking.entity.BookingStatus;
-import lk.sliit.it3030.smartcampus.booking.exception.BookingConflictException;
-import lk.sliit.it3030.smartcampus.booking.repository.BookingRepository;
-import lk.sliit.it3030.smartcampus.booking.service.BookingService;
+import com.campus.booking.dto.BookingCreateRequestDto;
+import com.campus.booking.dto.BookingResponseDto;
+import com.campus.booking.entity.Booking;
+import com.campus.booking.entity.BookingStatus;
+import com.campus.booking.exception.BookingConflictException;
+import com.campus.booking.repository.BookingRepository;
+import com.campus.booking.service.BookingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

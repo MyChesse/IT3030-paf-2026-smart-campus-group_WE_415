@@ -1,54 +1,43 @@
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\admin\controller\AdminController.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\controller\AuthController.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\dto\AuthRequests.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\entity\AppUser.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\repository\AppUserRepository.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\security\OAuth2LoginFailureHandler.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\security\OAuth2LoginSuccessHandler.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\auth\service\AuthService.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\controller\BookingController.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\dto\BookingCreateRequestDto.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\dto\BookingResponseDto.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\dto\BookingStatusUpdateDto.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\entity\Booking.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\entity\BookingStatus.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\exception\BookingConflictException.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\admin\controller\AdminController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\controller\AuthController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\dto\AuthRequests.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\entity\AppUser.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\repository\AppUserRepository.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\security\OAuth2LoginFailureHandler.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\security\OAuth2LoginSuccessHandler.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\auth\service\AuthService.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\controller\BookingController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\dto\BookingCreateRequestDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\dto\BookingResponseDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\dto\BookingStatusUpdateDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\entity\Booking.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\entity\BookingStatus.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\exception\BookingConflictException.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\repository\BookingRepository.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\service\BookingService.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\common\exception\GlobalExceptionHandler.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\config\SecurityConfig.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\config\WebCorsConfig.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\controller\FacilityController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityCatalogResponseDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityItemDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityItemRequestDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityUnitDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityUnitRequestDto.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\entity\FacilityCategory.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\entity\FacilityItem.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\entity\FacilityUnit.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\exception\FacilityNotFoundException.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\repository\FacilityItemRepository.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\repository\FacilityUnitRepository.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\service\FacilityCatalogService.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\HomeController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\init\DataInitializer.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\notifications\controller\NotificationController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\notifications\entity\AppNotification.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\notifications\repository\AppNotificationRepository.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\resources\controller\ResourceController.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\resources\entity\CampusResource.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\resources\repository\CampusResourceRepository.java
+C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\SmartCampusBackendApplication.java
 C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\exception\GlobalExceptionHandler.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\repository\BookingRepository.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\booking\service\BookingService.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\config\SecurityConfig.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\config\WebCorsConfig.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\HomeController.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\init\DataInitializer.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\notifications\controller\NotificationController.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\notifications\entity\AppNotification.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\notifications\repository\AppNotificationRepository.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\resources\controller\ResourceController.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\resources\entity\CampusResource.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\resources\repository\CampusResourceRepository.java
-C:\Users\USER\OneDrive\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\lk\sliit\it3030\smartcampus\SmartCampusBackendApplication.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\controller\BookingController.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\dto\BookingCreateRequestDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\dto\BookingResponseDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\dto\BookingStatusUpdateDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\entity\Booking.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\entity\BookingStatus.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\exception\BookingConflictException.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\repository\BookingRepository.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\booking\service\BookingService.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\common\exception\GlobalExceptionHandler.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\config\FacilityCatalogSeeder.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\controller\FacilityController.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityCatalogResponseDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityItemDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityItemRequestDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityUnitDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\dto\FacilityUnitRequestDto.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\entity\FacilityCategory.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\entity\FacilityItem.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\entity\FacilityUnit.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\exception\FacilityNotFoundException.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\repository\FacilityItemRepository.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\repository\FacilityUnitRepository.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\facility\service\FacilityCatalogService.java
-C:\Users\ASUS TUF\Desktop\IT3030-paf-2026-smart-campus-group_WE_415\backend\src\main\java\com\campus\SmartCampusBackendApplication.java

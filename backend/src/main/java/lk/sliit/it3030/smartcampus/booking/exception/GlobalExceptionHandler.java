@@ -1,5 +1,6 @@
 package lk.sliit.it3030.smartcampus.booking.exception;
 
+import com.campus.booking.exception.BookingConflictException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
