@@ -17,7 +17,6 @@ import lk.sliit.it3030.smartcampus.ticket.repository.TicketAttachmentRepository;
 import lk.sliit.it3030.smartcampus.ticket.repository.TicketCommentRepository;
 import lk.sliit.it3030.smartcampus.ticket.security.RequestUser;
 import lk.sliit.it3030.smartcampus.ticket.security.UserRole;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
