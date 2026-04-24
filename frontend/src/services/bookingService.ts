@@ -25,6 +25,14 @@ export interface Booking {
   updatedAt: string;
 }
 
+export interface Resource {
+  id: number;
+  name: string;
+  type: string;
+  capacity: number;
+  location: string;
+}
+
 export const bookingService = {
   // Create a new booking
   createBooking: async (data: any) => {
@@ -37,6 +45,12 @@ export const bookingService = {
     const response = await api.get('/bookings/my');
     return response.data;
   },
+
+  getResources: async () => {
+    const response = await api.get('/resources');
+    return response.data;
+  },
+
 
   // Get all bookings (Admin)
   getAllBookings: async (status?: string) => {
