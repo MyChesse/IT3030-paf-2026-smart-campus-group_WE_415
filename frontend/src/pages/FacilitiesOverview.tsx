@@ -47,13 +47,22 @@ const FacilitiesOverview: React.FC = () => {
                 Availability and Unavailability
               </h1>
             </div>
-            <button
-              type="button"
-              onClick={() => navigate('/')}
-              className="rounded-xl border border-campus-line px-4 py-2 text-sm font-semibold text-slate-200 hover:border-campus-accent hover:text-campus-accent"
-            >
-              Back to Home
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => navigate('/facilities')}
+                className="rounded-xl border border-campus-line px-4 py-2 text-sm font-semibold text-slate-200 hover:border-campus-accent hover:text-campus-accent"
+              >
+                Open Booking
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="rounded-xl border border-campus-line px-4 py-2 text-sm font-semibold text-slate-200 hover:border-campus-accent hover:text-campus-accent"
+              >
+                Back to Home
+              </button>
+            </div>
           </div>
           <p className="mt-3 max-w-3xl text-slate-300">
             This page is view-only. You can only check which facility items and units are

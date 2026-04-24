@@ -41,22 +41,20 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-         <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/oauth2/callback" element={<OAuth2CallbackPage />} />
-        <Route path="/facilities-overview" element={<FacilitiesOverview />} />
-        <Route path="/facilities" element={<Facilities />} /> {/* Add Facilities route */}
-        <Route path="/admin" element={<AdminDashboard />} /> {/* Add AdminDashboard route */}
-        <Route path="/admin/facility-catalogue" element={<AdminDashboardFacility />} />
 
         <Route element={<PrivateRoute />}>
           <Route element={<ProtectedLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/notifications" element={<NotificationsPage />} />
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/facilities-overview" element={<FacilitiesOverview />} />
+            <Route path="/facilities" element={<Facilities />} />
 
             <Route path="/resources" element={<ResourceList />} />
             <Route path="/resources/new" element={<ResourceForm />} />
@@ -70,7 +68,9 @@ function App() {
             <Route path="/admin-bookings" element={<AdminBookings />} />
 
             <Route element={<AdminRoute />}>
-              <Route path="/admin" element={<AdminPage />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/users" element={<AdminPage />} />
+              <Route path="/admin/facility-catalogue" element={<AdminDashboardFacility />} />
             </Route>
           </Route>
         </Route>

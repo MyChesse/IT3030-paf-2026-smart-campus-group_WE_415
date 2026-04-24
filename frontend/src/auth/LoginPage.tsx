@@ -9,7 +9,7 @@ export default function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const from = (location.state as any)?.from?.pathname || '/dashboard';
+  const from = (location.state as any)?.from?.pathname || '/facilities-overview';
   const apiBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8081';
 
   const [form, setForm] = useState({ email: '', password: '' });
@@ -26,8 +26,12 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await login(form);
-      navigate(from, { replace: true });
+      const signedInUser = await login(form);
+      const roleBasedFallback = signedInUser.roles?.includes('ADMIN')
+        ? '/admin/facility-catalogue'
+        : '/facilities-overview';
+      const redirectTo = from === '/login' ? roleBasedFallback : from;
+      navigate(redirectTo, { replace: true });
     } catch (err: any) {
       setError(err.response?.data?.error || 'Login failed. Check your credentials.');
     } finally {

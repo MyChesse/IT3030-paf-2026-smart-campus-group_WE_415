@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { bookingService, type Booking, type Resource } from '../services/bookingService';
-import { Calendar as CalendarIcon, Loader2, X, Clock, MapPin, Users, AlertCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, Loader2, X, Clock, AlertCircle } from 'lucide-react';
 
 interface SDBookingCalendarProps {
   onDateSelect?: (date: Date) => void;
@@ -75,7 +75,7 @@ const SDBookingCalendar: React.FC<SDBookingCalendarProps> = ({ onDateSelect }) =
       const color = statusColors[booking.status] || '#3b82f6';
 
       return {
-        id: booking.id,
+        id: String(booking.id),
         title: `${resourceDisplay} - ${booking.status}`,
         start: booking.startTime,
         end: booking.endTime,

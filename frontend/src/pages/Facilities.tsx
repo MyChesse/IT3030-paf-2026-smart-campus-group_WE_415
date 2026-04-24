@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { saveBookingDraft } from '../services/bookingDraftService';
 import {
   categoryMeta,
@@ -24,6 +25,7 @@ const formatReason = (reason?: string | null) =>
   reason?.trim() ? reason : 'No reason provided yet.';
 
 const Facilities: React.FC = () => {
+  const navigate = useNavigate();
   const [catalog, setCatalog] = useState<FacilityCatalog>(emptyCatalog());
   const [activeCategory, setActiveCategory] =
     useState<FacilityCategoryKey>('lectureHalls');
@@ -125,15 +127,35 @@ const Facilities: React.FC = () => {
     <div className="min-h-screen bg-campus-surface text-slate-100">
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <header className="mb-8 rounded-3xl border border-campus-line bg-campus-card p-7 shadow-campus">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-campus-accent">
-            User Facilities
-          </p>
-          <h1 className="mt-3 text-3xl font-bold sm:text-4xl">Book Campus Resources</h1>
-          <p className="mt-3 max-w-3xl text-slate-300">
-            Open one of the sections and choose your item. Each item has a Book Now
-            button, and the booking cart in the middle area shows available numbers,
-            seats, projector and camera details before confirmation.
-          </p>
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-campus-accent">
+                User Facilities
+              </p>
+              <h1 className="mt-3 text-3xl font-bold sm:text-4xl">Book Campus Resources</h1>
+              <p className="mt-3 max-w-3xl text-slate-300">
+                Open one of the sections and choose your item. Each item has a Book Now
+                button, and the booking cart in the middle area shows available numbers,
+                seats, projector and camera details before confirmation.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => navigate('/facilities-overview')}
+                className="rounded-xl border border-campus-line px-4 py-2 text-sm font-semibold text-slate-200 hover:border-campus-accent hover:text-campus-accent"
+              >
+                View Availability
+              </button>
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="rounded-xl border border-campus-line px-4 py-2 text-sm font-semibold text-slate-200 hover:border-campus-accent hover:text-campus-accent"
+              >
+                Back to Home
+              </button>
+            </div>
+          </div>
           {error && (
             <p className="mt-4 rounded-xl border border-rose-400/40 bg-rose-500/10 px-3 py-2 text-sm text-rose-200">
               {error}
