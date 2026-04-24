@@ -1,7 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+:root {
+  --campus-surface: #0c1525;
+  --campus-card: #12223a;
+  --campus-line: #27415f;
+  --campus-accent: #ff9f43;
+  --campus-accent-strong: #ffb464;
+}
+
+@layer utilities {
+  .bg-campus-surface {
+    background: radial-gradient(circle at 15% 15%, #19304f 0%, var(--campus-surface) 42%),
+      radial-gradient(circle at 85% 0%, #17344a 0%, var(--campus-surface) 45%),
+      var(--campus-surface);
+  }
+
+  .bg-campus-card {
+    background-color: color-mix(in srgb, var(--campus-card) 92%, black 8%);
+  }
+
+  .border-campus-line {
+    border-color: var(--campus-line);
+  }
+
+  .text-campus-accent {
+    color: var(--campus-accent);
+  }
+
+  .bg-campus-accent {
+    background-color: var(--campus-accent);
+  }
+
+  .bg-campus-accent-strong {
+    background-color: var(--campus-accent-strong);
+  }
+
+  .shadow-campus {
+    box-shadow: 0 20px 40px -24px rgba(0, 0, 0, 0.75);
+  }
+
+  .shadow-campus-soft {
+    box-shadow: 0 18px 30px -24px rgba(5, 12, 21, 0.85);
+  }
+}
+
+body {
+  font-family: 'Manrope', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Sora', 'Manrope', sans-serif;
 }
