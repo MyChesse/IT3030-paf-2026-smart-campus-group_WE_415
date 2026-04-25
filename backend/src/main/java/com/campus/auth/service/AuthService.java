@@ -55,6 +55,19 @@ public class AuthService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
+    public AppUser getCurrentUser(String authHeader, String fallbackUserId) {
+        try {
+            return getCurrentUser(authHeader);
+        } catch (ResponseStatusException ex) {
+            if (fallbackUserId != null && !fallbackUserId.trim().isEmpty()) {
+                Long userId = Long.valueOf(fallbackUserId.trim());
+                return appUserRepository.findById(userId)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+            }
+            throw ex;
+        }
+    }
+
     public AppUser updateProfile(String authHeader, AuthRequests.UpdateProfileRequest request) {
         AppUser user = getCurrentUser(authHeader);
         user.setName(request.getName());
@@ -98,6 +111,17 @@ public class AuthService {
         }
 
         throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unauthorized");
+    }
+
+    public Long resolveUserId(String authHeader, String fallbackUserId) {
+        try {
+            return resolveUserId(authHeader);
+        } catch (ResponseStatusException ex) {
+            if (fallbackUserId != null && !fallbackUserId.trim().isEmpty()) {
+                return Long.valueOf(fallbackUserId.trim());
+            }
+            throw ex;
+        }
     }
 
     public String issueToken(Long userId) {

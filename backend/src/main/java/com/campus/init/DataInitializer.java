@@ -79,8 +79,12 @@ public class DataInitializer {
         }
 
         if (appNotificationRepository.count() == 0) {
+            Long defaultUserId = appUserRepository.findByEmail("user@smartuni.com")
+                    .map(AppUser::getId)
+                    .orElse(1L);
+
             AppNotification notification = new AppNotification();
-            notification.setUserId(1L);
+            notification.setUserId(defaultUserId);
             notification.setType("BOOKING_APPROVED");
             notification.setTitle("Booking Approved");
             notification.setMessage("Your booking request has been approved.");

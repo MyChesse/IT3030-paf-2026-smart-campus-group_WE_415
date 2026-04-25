@@ -36,27 +36,30 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> createTicket(
             @RequestPart("ticket") @Valid TicketCreateRequestDto request,
             @RequestPart(value = "attachments", required = false) List<MultipartFile> attachments,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         TicketResponseDto response = ticketService.createTicket(request, attachments, user);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/my")
     public ResponseEntity<List<TicketResponseDto>> getMyTickets(
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.ok(ticketService.getMyTickets(user));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<TicketResponseDto> getTicketById(
             @PathVariable Long id,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.ok(ticketService.getTicketById(id, user));
     }
 
@@ -67,9 +70,10 @@ public class TicketController {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) Long assignedTechnician,
             @RequestParam(required = false) String search,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         TicketListFiltersDto filters = new TicketListFiltersDto(status, priority, category, assignedTechnician, search);
         return ResponseEntity.ok(ticketService.getTickets(filters, user));
     }
@@ -78,9 +82,10 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> assignTechnician(
             @PathVariable Long id,
             @RequestBody @Valid TicketAssignRequestDto request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.ok(ticketService.assignTechnician(id, request, user));
     }
 
@@ -88,9 +93,10 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> updateStatus(
             @PathVariable Long id,
             @RequestBody @Valid TicketStatusUpdateRequestDto request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.ok(ticketService.updateStatus(id, request, user));
     }
 
@@ -98,9 +104,10 @@ public class TicketController {
     public ResponseEntity<TicketResponseDto> updateResolution(
             @PathVariable Long id,
             @RequestBody @Valid TicketResolutionUpdateRequestDto request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.ok(ticketService.updateResolutionNotes(id, request, user));
     }
 
@@ -108,9 +115,10 @@ public class TicketController {
     public ResponseEntity<TicketCommentResponseDto> addComment(
             @PathVariable Long id,
             @RequestBody @Valid TicketCommentCreateRequestDto request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketService.addComment(id, request, user));
     }
 
@@ -118,18 +126,20 @@ public class TicketController {
     public ResponseEntity<TicketCommentResponseDto> updateComment(
             @PathVariable Long commentId,
             @RequestBody @Valid TicketCommentUpdateRequestDto request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         return ResponseEntity.ok(ticketService.updateComment(commentId, request, user));
     }
 
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<Void> deleteComment(
             @PathVariable Long commentId,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         ticketService.deleteComment(commentId, user);
         return ResponseEntity.noContent().build();
     }
@@ -138,15 +148,16 @@ public class TicketController {
     public ResponseEntity<Void> deleteAttachment(
             @PathVariable Long ticketId,
             @PathVariable Long attachmentId,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        RequestUser user = resolveAuthenticatedUser(authHeader);
+        RequestUser user = resolveAuthenticatedUser(authHeader, fallbackUserId);
         ticketService.deleteAttachment(ticketId, attachmentId, user);
         return ResponseEntity.noContent().build();
     }
 
-    private RequestUser resolveAuthenticatedUser(String authHeader) {
-        AppUser appUser = authService.getCurrentUser(authHeader);
+    private RequestUser resolveAuthenticatedUser(String authHeader, String fallbackUserId) {
+        AppUser appUser = authService.getCurrentUser(authHeader, fallbackUserId);
         return requestUserResolver.resolveAuthenticated(appUser.getId(), appUser.getRoles(), appUser.getName());
     }
 }

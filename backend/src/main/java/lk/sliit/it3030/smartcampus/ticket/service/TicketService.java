@@ -1,12 +1,12 @@
 package lk.sliit.it3030.smartcampus.ticket.service;
 
+import com.campus.notifications.service.NotificationService;
 import lk.sliit.it3030.smartcampus.ticket.dto.*;
 import lk.sliit.it3030.smartcampus.ticket.entity.IncidentTicket;
 import lk.sliit.it3030.smartcampus.ticket.entity.TicketAttachment;
 import lk.sliit.it3030.smartcampus.ticket.entity.TicketComment;
 import lk.sliit.it3030.smartcampus.ticket.entity.TicketStatus;
 import lk.sliit.it3030.smartcampus.ticket.exception.CommentNotFoundException;
-import lk.sliit.it3030.smartcampus.ticket.exception.FileValidationException;
 import lk.sliit.it3030.smartcampus.ticket.exception.ForbiddenActionException;
 import lk.sliit.it3030.smartcampus.ticket.exception.InvalidTicketOperationException;
 import lk.sliit.it3030.smartcampus.ticket.exception.TicketNotFoundException;
@@ -33,19 +33,22 @@ public class TicketService {
     private final TicketCommentRepository ticketCommentRepository;
     private final TicketAttachmentStorageService attachmentStorageService;
     private final TicketMapper ticketMapper;
+    private final NotificationService notificationService;
 
     public TicketService(
             IncidentTicketRepository incidentTicketRepository,
             TicketAttachmentRepository ticketAttachmentRepository,
             TicketCommentRepository ticketCommentRepository,
             TicketAttachmentStorageService attachmentStorageService,
-            TicketMapper ticketMapper
+            TicketMapper ticketMapper,
+            NotificationService notificationService
     ) {
         this.incidentTicketRepository = incidentTicketRepository;
         this.ticketAttachmentRepository = ticketAttachmentRepository;
         this.ticketCommentRepository = ticketCommentRepository;
         this.attachmentStorageService = attachmentStorageService;
         this.ticketMapper = ticketMapper;
+        this.notificationService = notificationService;
     }
 
     @Transactional
@@ -129,6 +132,12 @@ public class TicketService {
         ticket.setAssignedTechnicianName(request.getAssignedTechnicianName().trim());
 
         IncidentTicket saved = incidentTicketRepository.save(ticket);
+        notifyTicketOwner(
+            saved,
+            "TICKET_STATUS_CHANGED",
+            "Ticket assigned",
+            "Your ticket " + saved.getTicketCode() + " has been assigned to a technician."
+        );
         return ticketMapper.toSummary(saved);
     }
 
@@ -153,6 +162,12 @@ public class TicketService {
         }
 
         IncidentTicket saved = incidentTicketRepository.save(ticket);
+        notifyTicketOwner(
+                saved,
+                "TICKET_STATUS_CHANGED",
+                "Ticket status updated",
+                buildStatusUpdateMessage(saved, request)
+        );
         return ticketMapper.toSummary(saved);
     }
 
@@ -163,6 +178,12 @@ public class TicketService {
 
         ticket.setResolutionNotes(request.getResolutionNotes().trim());
         IncidentTicket saved = incidentTicketRepository.save(ticket);
+        notifyTicketOwner(
+            saved,
+            "TICKET_STATUS_CHANGED",
+            "Ticket updated",
+            "Resolution notes were updated for your ticket " + saved.getTicketCode() + "."
+        );
         return ticketMapper.toSummary(saved);
     }
 
@@ -179,6 +200,16 @@ public class TicketService {
         comment.setAuthorName(user.displayName());
 
         TicketComment saved = ticketCommentRepository.save(comment);
+
+        if (!user.userId().equals(ticket.getCreatedByUserId())) {
+            notifyTicketOwner(
+                ticket,
+                "TICKET_COMMENT_ADDED",
+                "New ticket comment",
+                user.displayName() + " added a comment on your ticket " + ticket.getTicketCode() + "."
+            );
+        }
+
         return new TicketCommentResponseDto(
                 saved.getId(),
                 saved.getCommentText(),
@@ -314,5 +345,31 @@ public class TicketService {
 
     private String generateTicketCode(Long id) {
         return String.format("TCK-%04d", id);
+    }
+
+    private void notifyTicketOwner(IncidentTicket ticket, String type, String title, String message) {
+        notificationService.createNotification(ticket.getCreatedByUserId(), type, title, message);
+    }
+
+    private String buildStatusUpdateMessage(IncidentTicket ticket, TicketStatusUpdateRequestDto request) {
+        StringBuilder message = new StringBuilder("Your ticket ")
+                .append(ticket.getTicketCode())
+                .append(" status changed to ")
+                .append(request.getStatus())
+                .append('.');
+
+        if (request.getStatus() == TicketStatus.REJECTED
+                && request.getRejectionReason() != null
+                && !request.getRejectionReason().trim().isEmpty()) {
+            message.append(" Reason: ").append(request.getRejectionReason().trim());
+        }
+
+        if ((request.getStatus() == TicketStatus.RESOLVED || request.getStatus() == TicketStatus.CLOSED)
+                && request.getResolutionNotes() != null
+                && !request.getResolutionNotes().trim().isEmpty()) {
+            message.append(" Notes: ").append(request.getResolutionNotes().trim());
+        }
+
+        return message.toString();
     }
 }

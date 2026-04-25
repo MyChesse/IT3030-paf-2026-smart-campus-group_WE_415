@@ -42,17 +42,19 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<BookingResponseDto> createBooking(
             @Valid @RequestBody BookingCreateRequestDto request,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        Long userId = authService.resolveUserId(authHeader);
+        Long userId = authService.resolveUserId(authHeader, fallbackUserId);
         return ResponseEntity.status(201).body(bookingService.createBooking(request, userId));
     }
 
     @GetMapping("/my")
     public ResponseEntity<List<BookingResponseDto>> getMyBookings(
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        Long userId = authService.resolveUserId(authHeader);
+        Long userId = authService.resolveUserId(authHeader, fallbackUserId);
         return ResponseEntity.ok(bookingService.getMyBookings(userId));
     }
 
@@ -61,9 +63,10 @@ public class BookingController {
             @RequestParam(required = false) BookingStatus status,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        AppUser user = authService.getCurrentUser(authHeader);
+        AppUser user = authService.getCurrentUser(authHeader, fallbackUserId);
         ensureAdminLike(user);
         return ResponseEntity.ok(bookingService.getAllBookings(status, startDate, endDate));
     }
@@ -72,9 +75,10 @@ public class BookingController {
     public ResponseEntity<BookingResponseDto> approveBooking(
             @PathVariable Long id,
             @RequestBody BookingStatusUpdateDto dto,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        AppUser user = authService.getCurrentUser(authHeader);
+        AppUser user = authService.getCurrentUser(authHeader, fallbackUserId);
         ensureAdminLike(user);
         return ResponseEntity.ok(bookingService.approveBooking(id, dto.reason(), user.getId()));
     }
@@ -83,9 +87,10 @@ public class BookingController {
     public ResponseEntity<BookingResponseDto> rejectBooking(
             @PathVariable Long id,
             @RequestBody BookingStatusUpdateDto dto,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        AppUser user = authService.getCurrentUser(authHeader);
+        AppUser user = authService.getCurrentUser(authHeader, fallbackUserId);
         ensureAdminLike(user);
         return ResponseEntity.ok(bookingService.rejectBooking(id, dto.reason(), user.getId()));
     }
@@ -94,10 +99,11 @@ public class BookingController {
     public ResponseEntity<BookingResponseDto> cancelBooking(
             @PathVariable Long id,
             @RequestBody(required = false) BookingStatusUpdateDto dto,
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
         String reason = dto != null && dto.reason() != null ? dto.reason() : "Cancelled by user";
-        AppUser user = authService.getCurrentUser(authHeader);
+        AppUser user = authService.getCurrentUser(authHeader, fallbackUserId);
         boolean isAdminLike = user.getRoles().contains("ADMIN") || user.getRoles().contains("STAFF");
         return ResponseEntity.ok(bookingService.cancelBooking(id, reason, user.getId(), isAdminLike));
     }

@@ -26,10 +26,11 @@ public class NotificationController {
     @GetMapping
     public ResponseEntity<Map<String, Object>> getNotifications(
             @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
-        Long userId = authService.resolveUserId(authHeader);
+        Long userId = authService.resolveUserId(authHeader, fallbackUserId);
         Page<AppNotification> result = appNotificationRepository.findByUserIdOrderByCreatedAtDesc(userId, PageRequest.of(page, size));
 
         return ResponseEntity.ok(Map.of(
@@ -41,9 +42,10 @@ public class NotificationController {
 
     @GetMapping("/unread-count")
     public ResponseEntity<Map<String, Object>> getUnreadCount(
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        Long userId = authService.resolveUserId(authHeader);
+        Long userId = authService.resolveUserId(authHeader, fallbackUserId);
         long count = appNotificationRepository.countByUserIdAndReadFalse(userId);
         return ResponseEntity.ok(Map.of("count", count));
     }
@@ -59,9 +61,10 @@ public class NotificationController {
 
     @PatchMapping("/read-all")
     public ResponseEntity<Map<String, Object>> markAllAsRead(
-            @RequestHeader(value = "Authorization", required = false) String authHeader
+            @RequestHeader(value = "Authorization", required = false) String authHeader,
+            @RequestHeader(value = "X-User-Id", required = false) String fallbackUserId
     ) {
-        Long userId = authService.resolveUserId(authHeader);
+        Long userId = authService.resolveUserId(authHeader, fallbackUserId);
         appNotificationRepository.findByUserIdOrderByCreatedAtDesc(userId, PageRequest.of(0, 1000))
                 .forEach(notification -> {
                     notification.setRead(true);
