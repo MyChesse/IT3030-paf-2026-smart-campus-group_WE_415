@@ -21,7 +21,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ comments, onAddComment,
   };
 
   return (
-    <div className="ticket-card">
+    <div className="comment-section">
       <h3>Comments</h3>
       <form onSubmit={submit} className="ticket-actions" style={{ marginBottom: '0.8rem' }}>
         <input
